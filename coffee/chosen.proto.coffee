@@ -229,7 +229,6 @@ class @Chosen extends AbstractChosen
     @active_field = true
 
     @search_field.value = this.get_search_field_value()
-    @search_field.writeAttribute("aria-expanded", "true")
     this.search_results.writeAttribute("aria-busy", "false")
     @search_field.focus()
 
@@ -299,6 +298,7 @@ class @Chosen extends AbstractChosen
     @container.addClassName "chosen-with-drop"
     @results_showing = true
 
+    @search_field.writeAttribute("aria-expanded", "true")
     @search_field.focus()
     @search_field.value = this.get_search_field_value()
 
@@ -319,6 +319,7 @@ class @Chosen extends AbstractChosen
       @container.removeClassName "chosen-dropup"
       @form_field.fire("chosen:hiding_dropdown", {chosen: this})
 
+    @search_field.writeAttribute("aria-expanded", "false")
     @results_showing = false
 
 
@@ -371,7 +372,7 @@ class @Chosen extends AbstractChosen
     if item.disabled
       choice.addClassName 'search-choice-disabled'
     else
-      close_link = new Element('button', { type: 'button', tabindex: -1, class: 'search-choice-close', rel: item.data['data-option-array-index'] })
+      close_link = new Element('button', { type: 'button', tabindex: -1, class: 'search-choice-close', rel: item.data['data-option-array-index'] }).update('<span class="visually-hidden focusable">' + AbstractChosen.default_remove_item_text + '</span>')
       close_link.observe "click", (evt) => this.choice_destroy_link_click(evt)
       choice.insert close_link
     if @inherit_option_classes && item.classes
