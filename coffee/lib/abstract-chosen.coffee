@@ -453,7 +453,7 @@ class AbstractChosen
 
   get_single_html: ->
     """
-      <a class="chosen-single chosen-default">
+      <a class="chosen-single chosen-default" role="button">
         <span>#{@default_text}</span>
         <div><b></b></div>
       </a>
